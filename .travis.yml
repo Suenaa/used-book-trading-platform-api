@@ -12,17 +12,13 @@ script:
 - npm run lint
 - npm run coverage
 - npm run coverage:coveralls
-deploy:
-  provider: script
-  script: npm start
-  skip_cleanup: true
-  on:
-    branch: master
+
 addons:
   ssh_known_hosts:
   - 123.207.86.98
 after_script:
-- cat ./build/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+  - cat ./build/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+  - ssh blog@123.207.86.98 -o StrictHostKeyChecking=no 'cd ~/used-book-trading-platform-api && git pull && npm install && npm run build'
 before_install:
 - openssl aes-256-cbc -K $encrypted_d57f4651b35a_key -iv $encrypted_d57f4651b35a_iv
   -in id_rsa.enc -out ~/.ssh/id_rsa -d
