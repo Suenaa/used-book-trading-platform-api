@@ -1,5 +1,5 @@
 # KOA2 TypeScript Starter
-[![Build Status](https://travis-ci.org/sugerpocket/used-book-trading-platform-api.svg?branch=develop)](https://travis-ci.org/sugerpocket/used-book-trading-platform-api)
+[![Build Status](https://travis-ci.org/sugerpocket/used-book-trading-platform-api.svg?branch=master)](https://travis-ci.org/sugerpocket/used-book-trading-platform-api)
 [![Coverage Status](https://coveralls.io/repos/github/sugerpocket/used-book-trading-platform-api/badge.svg?branch=master)](https://coveralls.io/github/sugerpocket/used-book-trading-platform-api?branch=master)
 
 A NodeJS server was authored in the KOA2 framework with TypeScript.
