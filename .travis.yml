@@ -22,3 +22,5 @@ after_script:
 before_install:
 - openssl aes-256-cbc -K $encrypted_d57f4651b35a_key -iv $encrypted_d57f4651b35a_iv
   -in id_rsa.enc -out ~/.ssh/id_rsa -d
+- chmod 400 ~/.ssh/id_rsa.pub
+- chmod 400 ~/.ssh/id_rsa
