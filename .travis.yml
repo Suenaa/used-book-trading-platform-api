@@ -12,6 +12,9 @@ script:
 - npm run lint
 - npm run coverage
 - npm run coverage:coveralls
+addons:
+  ssh_known_hosts:
+  - 123.207.86.98
 after_script:
 - cat ./build/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 before_install:
