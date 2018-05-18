@@ -12,6 +12,12 @@ script:
 - npm run lint
 - npm run coverage
 - npm run coverage:coveralls
+deploy:
+  provider: script
+  script: npm start
+  skip_cleanup: true
+  on:
+    branch: master
 addons:
   ssh_known_hosts:
   - 123.207.86.98
