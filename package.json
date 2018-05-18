@@ -1,8 +1,8 @@
 {
-  "name": "koa-typescript-starter",
+  "name": "used-book-trading-platform-api",
   "version": "1.0.0",
-  "description": "A super cool endpoint for rendering a json list of tracks.",
-  "main": "app.js",
+  "description": "中山大学二手书交易平台服务端（demo）",
+  "main": "app/app.ts",
   "scripts": {
     "start": "npm run build && node ./dist/index.js",
     "build": "npm run lint && node_modules/typescript/bin/tsc",
@@ -17,15 +17,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ddimaria/koa-typescript-starter.git"
+    "url": "git+https://github.com/sugerpocket/used-book-trading-platform-api"
   },
-  "keywords": [
-    "loyalty",
-    "checkin",
-    "petro"
-  ],
-  "author": "David DiMaria",
-  "license": "ISC",
+  "author": "sugerpocket",
   "dependencies": {
     "@koa/cors": "^2.2.1",
     "koa": "^2.5.0",
