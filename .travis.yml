@@ -1,16 +1,19 @@
 language: node_js
 node_js:
-  - "8"
+- '8'
 branchs:
   only:
-    - master
+  - master
 cache:
   directories:
-    - "node_modules"
+  - node_modules
 script:
-  - npm test
-  - npm run lint
-  - npm run coverage
-  - npm run coverage:coveralls
+- npm test
+- npm run lint
+- npm run coverage
+- npm run coverage:coveralls
 after_script:
-  - cat ./build/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+- cat ./build/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+before_install:
+- openssl aes-256-cbc -K $encrypted_d57f4651b35a_key -iv $encrypted_d57f4651b35a_iv
+  -in id_rsa.enc -out ~\/.ssh/id_rsa -d
