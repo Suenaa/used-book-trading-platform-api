@@ -25,7 +25,7 @@ export async function querySession(session: SessionBase): Promise<Session> {
   return;
 }
 
-export async function querySessionById(id: number) {
+export async function querySessionById(id: number): Promise<Session> {
   const result = await query('select * from sessions where session_id = ?', [id]);
   if (result && result.length) {
     return result[0];
