@@ -1,6 +1,10 @@
 import { retrieveOneDetail, retrieveAllBooks, deleteOneBook, addOnebook, BookMeta } from '../models/book.model';
 import { Context } from 'koa';
 import { SoftError } from '../error';
+import * as fs from 'fs';
+import * as path from 'path';
+
+const imagesDir = path.resolve(process.cwd(), 'public/images');
 
 export async function createOneBook(ctx: Context, next: () => Promise<any>) {
   const book: BookMeta = ctx.body;
@@ -10,6 +14,23 @@ export async function createOneBook(ctx: Context, next: () => Promise<any>) {
     throw SoftError.create(ctx, '创建失败');
   }
   ctx.body = '创建成功';
+  return next();
+}
+
+export async function updateBookImg(ctx: Context, next: () => Promise<any>) {
+  const bid = ctx.params.bookId;
+  const file = ctx.request.body.files.file;
+  const ext = file.name.split('.').pop();
+
+  if (!['jpeg', 'jpg', 'png'].includes(ext)) {
+    throw SoftError.create(ctx, '文件必须为jpeg，jpg 或者 png 格式');
+  }
+
+  const reader = fs.createReadStream(file.path);
+  const upStream = fs.createWriteStream(`${imagesDir}/${bid}.${ext}`);
+  reader.pipe(upStream);
+
+  ctx.body = '上传成功';
   return next();
 }
 

@@ -25,17 +25,21 @@ export async function findTradeById(id: number): Promise<Trade | undefined> {
   }
 }
 
-export function findTradeByBuyer(id: number): Promise<Trade[]> {
+export function findTradesByBuyer(id: number): Promise<Trade[]> {
   return query('select * from trades where buyer_id = ?', [id]);
 }
 
-export function findTradeBySeller(id: number): Promise<Trade[]> {
-  return query('select * from trades where seller_id = ?', [id]);
+export function findTradesBySeller(id: number): Promise<Trade[]> {
+  return query('select * from trades T where seller_id = ?', [id]);
 }
 
-export async function findTradeByBook(id: number): Promise<Trade | undefined> {
+export function findTrades(id: number): Promise<Trade[]> {
+  return query('select * from trades T join books B where T.book_id = B.book_id and (T.seller_id = ? or T.buyer_id = ?) ', [id, id]);
+}
+
+export async function findTradesByBook(id: number): Promise<Trade | undefined> {
   const result = await query('select * from trades where book_id = ?', [id]);
-  if (result && result.length) {
+  if (result && result.lengh) {
     return result[0];
   }
 }

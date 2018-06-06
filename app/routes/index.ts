@@ -1,6 +1,8 @@
 import * as Router from 'koa-router';
 import user from './user';
 import book from './book';
+import trade from './trade';
+import message from './message';
 
 const router = new Router();
 
@@ -9,6 +11,8 @@ const router = new Router();
  */
 router.all('/user', user);
 router.all('/book', book);
+router.all('/trade', trade);
+router.all('/message', message);
 /**
  * Basic healthcheck
  */

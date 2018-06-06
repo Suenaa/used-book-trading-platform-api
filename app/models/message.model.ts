@@ -19,3 +19,8 @@ export function createOneMessage(msg: MessageBase): Promise<void> {
 export function getSessionMessages(id: number): Promise<Message[]> {
   return query('select * from messages where session_id = ?', [id]);
 }
+
+
+export async function lastMessages(id: number) {
+  return query('select session_id, sender_id, reciever_id, content, MAX(time) from messages where (sender_id = ? or reciever_id = ?) group by session_id', [id, id]);
+}

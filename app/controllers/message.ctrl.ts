@@ -7,7 +7,7 @@ import { createOneMessage, getSessionMessages } from '../models/message.model';
  * 有 session 的情况下直接拿到 session 插入 message
  */
 export async function sendMessage(ctx: Context, next: () => Promise<any>) {
-  const sid: number = ctx.params.sid;
+  const sid: number = ctx.params.sessionId;
   const uid: number = ctx.session.studentId;
   const msg = ctx.body;
 

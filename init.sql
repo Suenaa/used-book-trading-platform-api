@@ -4,6 +4,7 @@ use SYSU_second_hand_book_trading;
 
 CREATE TABLE users(
   student_id int(8) not null primary key,
+  nickname varchar(10) not null,
   password char(32) not null
 );
 

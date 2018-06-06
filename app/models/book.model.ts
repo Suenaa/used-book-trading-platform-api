@@ -37,6 +37,14 @@ export function addOnebook(book: BookMeta) {
   );
 }
 
+export function updateState(state: 1 | 2 | 3, id: number) {
+  return query('update books set state = ? where book_id = ?', [state, id]);
+}
+
+export function updateImgUrl(img: string, id: number) {
+  return query('update books set img = ? where book_id = ?', [img]);
+}
+
 export function retrieveBooksByPublisher(id: number): Promise<BookBase[]> {
   return query('select name, author from books where `publisher_id` = ?', [id]);
 }

@@ -15,7 +15,12 @@ import { errorHandler } from './error';
 
 const app = new Koa();
 
-app.use(koaBody());
+app.use(koaBody({
+  multipart: true,
+  formidable: {
+    maxFieldsSize: 200 * 1024 * 1024,
+  }
+}));
 app.use(koaValidator());
 app.use(cors());
 app.use(logger);
