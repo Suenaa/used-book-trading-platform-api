@@ -3,7 +3,7 @@ import * as koaBody from 'koa-body';
 import * as cors from '@koa/cors';
 import * as session from 'koa-session';
 
-// const serve = require('koa-static');
+const serve = require('koa-static');
 const koaValidator = require('koa-async-validator');
 const koaSwagger = require('koa2-swagger-ui');
 
@@ -28,7 +28,7 @@ app.use(logger);
 app.use(errorHandler);
 app.use(router.routes());
 app.use(router.allowedMethods());
-// app.use(serve('public'));
+app.use(serve('public'));
 app.use(koaSwagger({
   routePrefix: '/swagger',
   swaggerOptions: {
