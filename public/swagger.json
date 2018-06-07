@@ -81,15 +81,76 @@
     },
     "/book": {
       "get": {
-      "summary": "获取所有书籍",
-      "responses": {
-        "200": {
-          "description": "所有书籍列表",
-          "schema": {
-            "type": "array",
-            "items": {
+        "summary": "获取所有书籍",
+        "responses": {
+          "200": {
+            "description": "所有书籍列表",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "bookId": {
+                    "type": "number"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "author": {
+                    "type": "string"
+                  },
+                  "publisherId": {
+                    "type": "number"
+                  }
+                }
+              },
+              "example": [
+                {
+                  "bookId": 1,
+                  "name": "test book",
+                  "author": "tinglideng",
+                  "publisherId": 15331060
+                },
+                {
+                  "bookId": 2,
+                  "name": "test book2",
+                  "author": "tinglideng",
+                  "publisherId": 15331060
+                },
+                {
+                  "bookId": 3,
+                  "name": "test book3",
+                  "author": "tinglideng",
+                  "publisherId": 15331060
+                },
+                {
+                  "bookId": 4,
+                  "name": "测试书籍",
+                  "author": "tinglideng",
+                  "publisherId": 15331060
+                },
+                {
+                  "bookId": 5,
+                  "name": "测试书籍",
+                  "author": "tinglideng",
+                  "publisherId": 15331060
+                }
+              ]
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "创建图书",
+        "responses": {
+          "200": {
+            "description": "图书详情",
+            "schema": {
+              "type": "object",
               "properties": {
                 "bookId": {
+                  "type": "number"
+                },
+                "publisherId": {
                   "type": "number"
                 },
                 "name": {
@@ -98,43 +159,123 @@
                 "author": {
                   "type": "string"
                 },
-                "publisherId": {
+                "img": {
+                  "type": "string"
+                },
+                "campus": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "number"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "phoneNum": {
+                  "type": "string"
+                },
+                "comment": {
+                  "type": "string"
+                },
+                "price": {
                   "type": "number"
                 }
-              }
-            },
-            "example": [
-              {
+              },
+              "example": {
                 "bookId": 1,
+                "publisherId": 15331060,
                 "name": "test book",
                 "author": "tinglideng",
-                "publisherId": 15331060
-              },
-              {
-                "bookId": 2,
-                "name": "test book2",
-                "author": "tinglideng",
-                "publisherId": 15331060
-              },
-              {
-                "bookId": 3,
-                "name": "test book3",
-                "author": "tinglideng",
-                "publisherId": 15331060
-              },
-              {
-                "bookId": 4,
-                "name": "测试书籍",
-                "author": "tinglideng",
-                "publisherId": 15331060
-              },
-              {
-                "bookId": 5,
-                "name": "测试书籍",
-                "author": "tinglideng",
-                "publisherId": 15331060
+                "img": "default.jpg",
+                "campus": "sysu",
+                "state": 4,
+                "description": "test",
+                "phoneNum": "13719177172",
+                "comment": "计算机 测试",
+                "price": 13.7
               }
-            ]}
+            }
+          }
+        }
+      }
+    },
+    "/book/{id}": {
+      "get": {
+        "summary": "获取图书",
+        "responses": {
+          "200": {
+            "description": "图书详情",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "bookId": {
+                  "type": "number"
+                },
+                "publisherId": {
+                  "type": "number"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "author": {
+                  "type": "string"
+                },
+                "img": {
+                  "type": "string"
+                },
+                "campus": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "number"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "phoneNum": {
+                  "type": "string"
+                },
+                "comment": {
+                  "type": "string"
+                },
+                "price": {
+                  "type": "number"
+                }
+              },
+              "example": {
+                "bookId": 1,
+                "publisherId": 15331060,
+                "name": "test book",
+                "author": "tinglideng",
+                "img": "default.jpg",
+                "campus": "sysu",
+                "state": 4,
+                "description": "test",
+                "phoneNum": "13719177172",
+                "comment": "计算机 测试",
+                "price": 13.7
+              }
+            }
+          }
+        }
+      }
+    },
+    "/book/{id}/img": {
+      "post": {
+        "summary": "上传图书图片",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "上传成功",
+            "schema": {
+              "tyoe": "string",
+              "schema": {
+                "type": "string"
+              },
+              "example": "上传成功"
+            }
           }
         }
       }
