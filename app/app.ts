@@ -32,7 +32,7 @@ app.use(serve('public'));
 app.use(koaSwagger({
   routePrefix: '/swagger',
   swaggerOptions: {
-    url: '/swagger.yml',
+    url: '/swagger.json',
   },
 }));
 

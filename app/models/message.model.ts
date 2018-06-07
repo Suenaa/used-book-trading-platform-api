@@ -13,8 +13,15 @@ export interface Message extends MessageBase {
   messageId: number;
 }
 
-export function createOneMessage(msg: MessageBase): Promise<void> {
+export function createOneMessage(msg: MessageBase): Promise<any> {
   return query('insert into messages (session_id, sender_id, reciever_id, content) values (?, ?, ?, ?)', [msg.sessionId, msg.senderId, msg.recieverId, msg.content]);
+}
+
+export async function retrieveOneMessage(id: number): Promise<Message> {
+  const result = await query('select * from messages where message_id = ?', [id]);
+  if (result && result[0]) {
+    return camelcaseAll(result[0]);
+  }
 }
 
 export function getSessionMessages(id: number): Promise<Message[]> {

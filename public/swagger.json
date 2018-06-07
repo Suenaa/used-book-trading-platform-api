@@ -1,0 +1,143 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "",
+    "version": "1.0.0",
+    "title": "SYSUsecond-handBookTradingPlatform"
+  },
+  "host": "http://123.207.86.98:3000",
+  "basePath": "/api",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/user/login": {
+      "post": {
+        "summary": "用户登录",
+        "description": "用户登录使用的 api",
+        "responses": {
+          "200": {
+            "description": "登陆成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "studentId": {
+                  "type": "string"
+                },
+                "nickname": {
+                  "type": "string"
+                }
+              },
+              "example": {
+                "studentId": "15331060",
+                "nickname": "sugerpocket"
+              }
+            }
+          },
+          "400": {
+            "description": "登陆失败",
+            "schema": {
+              "description": "失败原因",
+              "type": "string",
+              "example": "用户不存在"
+            }
+          }
+        }
+      }
+    },
+    "/user/register": {
+      "post": {
+        "summary": "用户注册",
+        "description": "用户注册使用的 api",
+        "responses": {
+          "200": {
+            "description": "注册成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "studentId": {
+                  "type": "number"
+                },
+                "nickname": {
+                  "type": "string"
+                }
+              },
+              "example": {
+                "studentId": 15331060,
+                "nickname": "sugerpocket"
+              }
+            }
+          },
+          "400": {
+            "description": "注册失败",
+            "schema": {
+              "description": "失败原因",
+              "type": "string",
+              "example": "用户名必须为8位学号"
+            }
+          }
+        }
+      }
+    },
+    "/book": {
+      "get": {
+      "summary": "获取所有书籍",
+      "responses": {
+        "200": {
+          "description": "所有书籍列表",
+          "schema": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "bookId": {
+                  "type": "number"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "author": {
+                  "type": "string"
+                },
+                "publisherId": {
+                  "type": "number"
+                }
+              }
+            },
+            "example": [
+              {
+                "bookId": 1,
+                "name": "test book",
+                "author": "tinglideng",
+                "publisherId": 15331060
+              },
+              {
+                "bookId": 2,
+                "name": "test book2",
+                "author": "tinglideng",
+                "publisherId": 15331060
+              },
+              {
+                "bookId": 3,
+                "name": "test book3",
+                "author": "tinglideng",
+                "publisherId": 15331060
+              },
+              {
+                "bookId": 4,
+                "name": "测试书籍",
+                "author": "tinglideng",
+                "publisherId": 15331060
+              },
+              {
+                "bookId": 5,
+                "name": "测试书籍",
+                "author": "tinglideng",
+                "publisherId": 15331060
+              }
+            ]}
+          }
+        }
+      }
+    }
+  }
+}

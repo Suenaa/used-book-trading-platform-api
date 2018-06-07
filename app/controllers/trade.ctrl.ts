@@ -24,15 +24,17 @@ export async function trade(ctx: Context, next: () => Promise<any>) {
     throw SoftError.create(ctx, '不能购买自己上架的书籍');
   }
 
-  await createOneTrade({
+  const { insertId } = await createOneTrade({
     buyerId: uid,
     sellerId: book.publisherId,
     bookId: book.bookId,
   });
 
+  const result = await findTradeById(insertId);
+
   await updateState(2, book.bookId);
 
-  ctx.body = '购买成功';
+  ctx.body = result;
 }
 
 export async function sendBook(ctx: Context, next: () => Promise<any>) {

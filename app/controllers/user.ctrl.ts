@@ -17,8 +17,11 @@ export async function login(ctx: Context, next: () => Promise<any>) {
     throw SoftError.create(ctx, '密码错误');
   }
 
-  ctx.body = '登陆成功';
   ctx.session.user = user;
+
+  delete user.password;
+
+  ctx.body = user;
 
   return next();
 }
@@ -43,7 +46,7 @@ export async function register(ctx: Context, next: () => Promise<any>) {
   const user = await retrieveOneUserById(id);
 
   if (user) {
-    throw SoftError.create(ctx, '改用户已注册');
+    throw SoftError.create(ctx, '该用户已注册');
   }
 
   await createOneUser({
@@ -52,6 +55,10 @@ export async function register(ctx: Context, next: () => Promise<any>) {
     password: md5(password),
   });
 
-  ctx.body = '新用户注册成功';
+  ctx.body = {
+    studentId: id,
+    nickname: nickname,
+  };
+
   return next();
 }

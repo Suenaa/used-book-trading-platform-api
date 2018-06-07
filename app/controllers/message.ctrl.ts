@@ -1,7 +1,7 @@
 import { SoftError } from '../error';
 import { querySession, querySessionById, createOneSession } from '../models/session.model';
 import { Context } from 'koa';
-import { createOneMessage, getSessionMessages, lastMessages } from '../models/message.model';
+import { createOneMessage, getSessionMessages, lastMessages, retrieveOneMessage } from '../models/message.model';
 
 /**
  * 有 session 的情况下直接拿到 session 插入 message
@@ -70,14 +70,16 @@ export async function sendMessageTo(ctx: Context, next: () => Promise<any>) {
     session = await querySession(query);
   }
 
-  await createOneMessage({
+  const { insertId } = await createOneMessage({
     recieverId: tid,
     senderId: uid,
     sessionId: session.sessionId,
     content: msg,
   });
 
-  ctx.body = '发送消息成功';
+  const result = await retrieveOneMessage(insertId);
+
+  ctx.body = result;
 }
 
 export async function retrieveMessages(ctx: Context, next: () => Promise<any>) {

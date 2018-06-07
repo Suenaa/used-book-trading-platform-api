@@ -11,12 +11,14 @@ export async function createOneBook(ctx: Context, next: () => Promise<any>) {
   const uid: number = ctx.session.user.studentId;
   book.state = 1;
   book.publisherId = uid;
-  const result = await addOneBook(book);
+  const { insertId } = await addOneBook(book);
+
+  const result = await retrieveOneDetail(insertId);
 
   if (!result) {
     throw SoftError.create(ctx, '创建失败');
   }
-  ctx.body = '创建成功';
+  ctx.body = result;
   return next();
 }
 
