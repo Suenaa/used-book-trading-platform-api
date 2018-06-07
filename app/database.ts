@@ -4,7 +4,7 @@ const pool = mysql.createPool({
   host     :  '127.0.0.1',
   user     :  'root',
   password :  '12345678',
-  database :  'SYSU_second_hand_book_trading'
+  database :  'sysu_second_hand_book_trading'
 });
 
 export function query(sql: string, values: any) {
