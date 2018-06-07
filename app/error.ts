@@ -11,6 +11,7 @@ export async function errorHandler(ctx: Context, next: () => Promise<any>) {
         stack: e.stack,
         message: e.message,
       };
+      ctx.status = 500;
     }
   }
 }

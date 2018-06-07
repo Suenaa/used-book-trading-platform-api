@@ -4,18 +4,17 @@ import book from './book';
 import trade from './trade';
 import message from './message';
 
-const router = new Router();
+export const router = new Router();
 
 /**
  * Base route, return a 401
  */
-router.all('/user', user);
-router.all('/book', book);
-router.all('/trade', trade);
-router.all('/message', message);
+router.use('/user', user);
+router.use('/book', book);
+router.use('/trade', trade);
+router.use('/message', message);
 /**
  * Basic healthcheck
  */
 router.get('/healthcheck', async ctx => ctx.body = 'OK');
 
-export const routes = router.routes();

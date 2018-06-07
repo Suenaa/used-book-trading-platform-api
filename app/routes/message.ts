@@ -1,5 +1,4 @@
 import * as Router from 'koa-router';
-import * as bookCtrl from '../controllers/book.ctrl';
 import { retrieveLastMessages, retrieveMessages, sendMessage, sendMessageTo } from '../controllers/message.ctrl';
 
 const router = new Router();

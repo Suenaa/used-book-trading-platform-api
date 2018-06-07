@@ -6,6 +6,7 @@ export function camelcaseAll(target: { [key: string]: any } | null): any {
   for (const key in target) {
     temp[camelcase(key)] = target[key];
   }
+  return temp;
 }
 
 

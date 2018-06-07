@@ -1,4 +1,5 @@
 import { query } from '../database';
+import { camelcaseAll } from '../util';
 
 export interface SessionBase {
   buyerId: number;
@@ -18,9 +19,9 @@ export function deleteOneSession(id: number) {
 }
 
 export async function querySession(session: SessionBase): Promise<Session> {
-  const result = await query('select * from sessions where buyer_id = ? and seller_id = ?', [session.sellerId, session.sellerId]);
+  const result = await query('select * from sessions where buyer_id = ? and seller_id = ?', [session.buyerId, session.sellerId]);
   if (result && result.length) {
-    return result[0];
+    return camelcaseAll(result[0]);
   }
   return;
 }
@@ -28,7 +29,7 @@ export async function querySession(session: SessionBase): Promise<Session> {
 export async function querySessionById(id: number): Promise<Session> {
   const result = await query('select * from sessions where session_id = ?', [id]);
   if (result && result.length) {
-    return result[0];
+    return camelcaseAll(result[0]);
   } else {
     return;
   }

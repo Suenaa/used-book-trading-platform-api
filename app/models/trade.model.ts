@@ -1,4 +1,5 @@
 import { query } from '../database';
+import { camelcaseAll } from '../util';
 
 export interface TradeBase {
   buyerId: number;
@@ -21,25 +22,28 @@ export function deleteOneTrade(id: number) {
 export async function findTradeById(id: number): Promise<Trade | undefined> {
   const result = await query('select * from trades where trade_id = ?', [id]);
   if (result && result.length) {
-    return result[0];
+    return camelcaseAll(result[0]);
   }
 }
 
 export function findTradesByBuyer(id: number): Promise<Trade[]> {
-  return query('select * from trades where buyer_id = ?', [id]);
+  return query('select * from trades where buyer_id = ?', [id])
+    .then(result => (result || []).map((trade: any) => camelcaseAll(trade)));
 }
 
 export function findTradesBySeller(id: number): Promise<Trade[]> {
-  return query('select * from trades T where seller_id = ?', [id]);
+  return query('select * from trades T where seller_id = ?', [id])
+    .then(result => (result || []).map((trade: any) => camelcaseAll(trade)));
 }
 
 export function findTrades(id: number): Promise<Trade[]> {
-  return query('select * from trades T join books B where T.book_id = B.book_id and (T.seller_id = ? or T.buyer_id = ?) ', [id, id]);
+  return query('select * from trades T join books B where T.book_id = B.book_id and (T.seller_id = ? or T.buyer_id = ?) ', [id, id])
+    .then(result => (result || []).map((trade: any) => camelcaseAll(trade)));
 }
 
-export async function findTradesByBook(id: number): Promise<Trade | undefined> {
+export async function findTradeByBook(id: number): Promise<Trade | undefined> {
   const result = await query('select * from trades where book_id = ?', [id]);
   if (result && result.lengh) {
-    return result[0];
+    return camelcaseAll(result[0]);
   }
 }

@@ -2,6 +2,7 @@ import * as Koa from 'koa';
 import * as koaBody from 'koa-body';
 import * as cors from '@koa/cors';
 import * as session from 'koa-session';
+import * as md5 from 'md5';
 
 // const serve = require('koa-static');
 const koaValidator = require('koa-async-validator');
@@ -9,7 +10,7 @@ const koaSwagger = require('koa2-swagger-ui');
 
 import { config } from './config';
 import { logger } from './logger';
-import { routes } from './routes';
+import { router } from './routes';
 
 import { errorHandler } from './error';
 
@@ -21,10 +22,13 @@ app.use(koaBody({
     maxFieldsSize: 200 * 1024 * 1024,
   }
 }));
+
 app.use(koaValidator());
 app.use(cors());
 app.use(logger);
-app.use(routes);
+app.use(errorHandler);
+app.use(router.routes());
+app.use(router.allowedMethods());
 // app.use(serve('public'));
 app.use(koaSwagger({
   routePrefix: '/swagger',
@@ -32,6 +36,8 @@ app.use(koaSwagger({
     url: '/swagger.yml',
   },
 }));
+
+app.keys = ['sysu'];
 
 app.use(session({
   key: 'sugerpocket', /** (string) cookie key (default is koa:sess) */
@@ -45,8 +51,6 @@ app.use(session({
   rolling: false, /** (boolean) Force a session identifier cookie to be set on every response. The expiration is reset to the original maxAge, resetting the expiration countdown. (default is false) */
   renew: false
 }, app));
-
-app.use(errorHandler);
 
 export const server = app.listen(config.port);
 

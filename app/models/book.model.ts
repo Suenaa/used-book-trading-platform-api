@@ -11,9 +11,9 @@ export interface BookMeta extends BookBase {
   description: string;
   phone: number;
   campus: string;
-  tags: string;
+  comment: string;
   price: number;
-  state: 1 | 2 | 3;
+  state: 1 | 2 | 3 | 4;
 }
 
 export interface Book extends BookMeta {
@@ -21,7 +21,7 @@ export interface Book extends BookMeta {
 }
 
 export async function retrieveAllBooks(): Promise<BookBase[]> {
-  const result = await query('select name, author, publisherId from books', []);
+  const result = await query('select book_id, name, author, publisher_id from books', []);
   return (result || []).map((book: any) => camelcaseAll(book));
 }
 
@@ -30,14 +30,14 @@ export async function retrieveOneDetail(id: number): Promise<Book> {
   return camelcaseAll(result[0]);
 }
 
-export function addOnebook(book: BookMeta) {
+export function addOneBook(book: BookMeta) {
   return query(
-    'insert into books (name, author, publisher_id, description, phone, campus, tags, price) values (?, ?, ?, ?, ?, ?, ?, ?)',
-    [book.name, book.author, book.publisherId, book.description, book.phone, book.campus, book.tags, book.price],
+    'insert into books (name, author, publisher_id, description, phone_num, campus, comment, price) values (?, ?, ?, ?, ?, ?, ?, ?)',
+    [book.name, book.author, book.publisherId, book.description, book.phone, book.campus, book.comment, book.price],
   );
 }
 
-export function updateState(state: 1 | 2 | 3, id: number) {
+export function updateState(state: 1 | 2 | 3 | 4, id: number) {
   return query('update books set state = ? where book_id = ?', [state, id]);
 }
 

@@ -1,15 +1,15 @@
 import { SoftError } from '../error';
 import { querySession, querySessionById, createOneSession } from '../models/session.model';
 import { Context } from 'koa';
-import { createOneMessage, getSessionMessages } from '../models/message.model';
+import { createOneMessage, getSessionMessages, lastMessages } from '../models/message.model';
 
 /**
  * 有 session 的情况下直接拿到 session 插入 message
  */
 export async function sendMessage(ctx: Context, next: () => Promise<any>) {
   const sid: number = ctx.params.sessionId;
-  const uid: number = ctx.session.studentId;
-  const msg = ctx.body;
+  const uid: number = ctx.session.user.studentId;
+  const msg = ctx.request.body;
 
   if (!msg) throw SoftError.create(ctx, '消息不能为空');
 
@@ -32,14 +32,16 @@ export async function sendMessage(ctx: Context, next: () => Promise<any>) {
     content: msg,
   });
 
+  ctx.body = '消息发送成功';
+
   return next();
 }
 
 export async function sendMessageTo(ctx: Context, next: () => Promise<any>) {
-  const uid: number = ctx.session.studentId;
+  const uid: number = ctx.session.user.studentId;
   const tid: number = ctx.params.tid;
-  const role: 'buyer' | 'seller' = ctx.body.role;
-  const msg: string = ctx.body.msg;
+  const role: 'buyer' | 'seller' = ctx.request.body.role;
+  const msg: string = ctx.request.body.msg;
 
   if (!msg) throw SoftError.create(ctx, '消息不能为空');
 
@@ -65,9 +67,8 @@ export async function sendMessageTo(ctx: Context, next: () => Promise<any>) {
 
   if (!session) {
     await createOneSession(query);
+    session = await querySession(query);
   }
-
-  session = await querySession(query);
 
   await createOneMessage({
     recieverId: tid,
@@ -76,7 +77,7 @@ export async function sendMessageTo(ctx: Context, next: () => Promise<any>) {
     content: msg,
   });
 
-  return next();
+  ctx.body = '发送消息成功';
 }
 
 export async function retrieveMessages(ctx: Context, next: () => Promise<any>) {
@@ -85,10 +86,11 @@ export async function retrieveMessages(ctx: Context, next: () => Promise<any>) {
   const messages = await getSessionMessages(session);
 
   ctx.body = messages;
-
-  return next();
 }
 
 export async function retrieveLastMessages(ctx: Context, next: () => Promise<any>) {
-  // TODO: 拿到用户的最新消息
+  const uid = ctx.session.user.studentId;
+  const messages = await lastMessages(uid);
+
+  ctx.body = messages;
 }
