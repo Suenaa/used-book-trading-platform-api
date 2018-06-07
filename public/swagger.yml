@@ -11,3 +11,4 @@ basePath: "/api/v1"
 schemes:
 - "http"
 paths:
+  

@@ -2,7 +2,6 @@ import * as Koa from 'koa';
 import * as koaBody from 'koa-body';
 import * as cors from '@koa/cors';
 import * as session from 'koa-session';
-import * as md5 from 'md5';
 
 // const serve = require('koa-static');
 const koaValidator = require('koa-async-validator');

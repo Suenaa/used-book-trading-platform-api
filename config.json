@@ -1,0 +1,19 @@
+{
+  "name"        : "SYSUsecond-handBookTradingPlatform-api",
+  "script"      : "./node_modules/ts-node/dist/bin.js",
+  "args"        : "./app/app.ts",
+  "cwd"         : "./",
+  "ignore_watch" : [
+    "node_modules", 
+    "logs",
+    "public"
+  ],
+  "watch_options": {
+    "followSymlinks": false
+  },
+  "error_file" : "./logs/app-err.log",
+  "out_file"   : "./logs/app-out.log",
+  "env": {
+      "NODE_ENV": "production"
+  }
+}

@@ -1,5 +1,6 @@
 CREATE DATABASE sysu_second_hand_book_trading DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
-t
+
+use sysu_second_hand_book_trading;
 
 CREATE TABLE users(
   student_id int(8) not null primary key,

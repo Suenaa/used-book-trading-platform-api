@@ -1,5 +1,5 @@
 import { Context } from 'koa';
-import { findTrades, createOneTrade, findTradeByBook, findTradeById } from '../models/trade.model';
+import { findTrades, createOneTrade, findTradeById } from '../models/trade.model';
 import { retrieveOneDetail, updateState } from '../models/book.model';
 import { SoftError } from '../error';
 
