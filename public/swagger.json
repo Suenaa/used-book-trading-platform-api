@@ -202,6 +202,13 @@
     "/book/{id}": {
       "get": {
         "summary": "获取图书",
+        "parameters": {
+          "id": {
+            "type": "number",
+            "in": "query",
+            "desscription": "图书的id"
+          }
+        },
         "responses": {
           "200": {
             "description": "图书详情",
@@ -264,8 +271,15 @@
       "post": {
         "summary": "上传图书图片",
         "produces": [
-          "application/json"
+          "multipart/form-data"
         ],
+        "parameters": {
+          "file": {
+            "in": "form-data",
+            "required": true,
+            "type": "file"
+          }
+        },
         "responses": {
           "200": {
             "description": "上传成功",
