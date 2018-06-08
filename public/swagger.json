@@ -360,7 +360,7 @@
     "/message/last": {
       "get": {
         "summary": "获取每个房间的最新消息（message页面用）",
-        "response": {
+        "responses": {
           "200": {
             "description": "获取成功",
             "schema": {
@@ -384,17 +384,17 @@
                     "type": "string"
                   }
                 }
-              }
-            },
-            "example": [
-              {
-                "sessionId": 1,
-                "senderId": 15331060,
-                "recieverId": 15331059,
-                "content": "你好，在吗？",
-                "max-(time)": "2018-06-07T07:49:39.000Z"
-              }
-            ]
+              },
+              "example": [
+                {
+                  "sessionId": 1,
+                  "senderId": 15331060,
+                  "recieverId": 15331059,
+                  "content": "你好，在吗？",
+                  "max-(time)": "2018-06-07T07:49:39.000Z"
+                }
+              ]
+            }
           }
         }
       }
@@ -408,7 +408,7 @@
           "description": "房间号",
           "in": "query"
         }],
-        "response": {
+        "responses": {
           "200": {
             "description": "获取成功",
             "schema": {
@@ -432,17 +432,17 @@
                     "type": "string"
                   }
                 }
-              }
-            },
-            "example": [
-              {
-                "sessionId": 1,
-                "senderId": 15331060,
-                "recieverId": 15331059,
-                "content": "你好，在吗？",
-                "max-(time)": "2018-06-07T07:49:39.000Z"
-              }
-            ]
+              },
+              "example": [
+                {
+                  "sessionId": 1,
+                  "senderId": 15331060,
+                  "recieverId": 15331059,
+                  "content": "你好，在吗？",
+                  "max-(time)": "2018-06-07T07:49:39.000Z"
+                }
+              ]
+            }
           }
         }
       },
@@ -458,7 +458,7 @@
           "description": "房间号",
           "in": "query"
         }],
-        "response": {
+        "responses": {
           "200": {
             "description": "发送成功",
             "schema": {
@@ -479,14 +479,14 @@
                 "time": {
                   "type": "string"
                 }
+              },
+              "example": {
+                "sessionId": 1,
+                "senderId": 15331060,
+                "recieverId": 15331059,
+                "content": "你好，在吗？",
+                "time": "2018-06-07T07:49:39.000Z"
               }
-            },
-            "example": {
-              "sessionId": 1,
-              "senderId": 15331060,
-              "recieverId": 15331059,
-              "content": "你好，在吗？",
-              "time": "2018-06-07T07:49:39.000Z"
             }
           }
         }
@@ -511,7 +511,7 @@
           "in": "body",
           "type": "string"
         }],
-        "response": {
+        "responses": {
           "200": {
             "description": "发送成功",
             "schema": {
@@ -532,14 +532,14 @@
                 "time": {
                   "type": "string"
                 }
+              },
+              "example": {
+                "sessionId": 1,
+                "senderId": 15331060,
+                "recieverId": 15331059,
+                "content": "你好，在吗？",
+                "time": "2018-06-07T07:49:39.000Z"
               }
-            },
-            "example": {
-              "sessionId": 1,
-              "senderId": 15331060,
-              "recieverId": 15331059,
-              "content": "你好，在吗？",
-              "time": "2018-06-07T07:49:39.000Z"
             }
           }
         }
@@ -555,7 +555,7 @@
           "description": "书籍id",
           "type": "number"
         }],
-        "response": {
+        "responses": {
           "200": {
             "description": "交易确认",
             "schema": {
@@ -573,13 +573,13 @@
                 "bookId": {
                   "type": "number"
                 }
+              },
+              "example": {
+                "tradeId": 4,
+                "buyerId": 15331059,
+                "sellerId": 15331060,
+                "bookId": 6
               }
-            },
-            "example": {
-              "tradeId": 4,
-              "buyerId": 15331059,
-              "sellerId": 15331060,
-              "bookId": 6
             }
           }
         }
@@ -588,7 +588,7 @@
     "/trade": {
       "get": {
         "summary": "获取所有交易",
-        "response": {
+        "responses": {
           "200": {
             "description": "获取成功",
             "schema": {
@@ -638,24 +638,24 @@
                     "type": "number"
                   }
                 }
-              }
-            },
-            "example": [{
-              "tradeId": 1,
-              "buyerId": 15331059,
-              "sellerId": 15331060,
-              "bookId": 2,
-              "publisherId": 15331060,
-              "name": "test book2",
-              "author": "tinglideng",
-              "img": "default.jpg",
-              "campus": "sysu",
-              "state": 3,
-              "description": "test",
-              "phoneNum": "13719177172",
-              "comment": "计算机 测试",
-              "price": 13.7
-            }]
+              },
+              "example": [{
+                "tradeId": 1,
+                "buyerId": 15331059,
+                "sellerId": 15331060,
+                "bookId": 2,
+                "publisherId": 15331060,
+                "name": "test book2",
+                "author": "tinglideng",
+                "img": "default.jpg",
+                "campus": "sysu",
+                "state": 3,
+                "description": "test",
+                "phoneNum": "13719177172",
+                "comment": "计算机 测试",
+                "price": 13.7
+              }]
+            }
           }
         }
       }
@@ -670,13 +670,13 @@
           "description": "trade id",
           "type": "number"
         }],
-        "response": {
+        "responses": {
           "200": {
             "description": "正在送货",
             "schema": {
-              "type": "string"
-            },
-            "example": "正在送货"
+              "type": "string",
+              "example": "正在送货"
+            }
           }
         }
       }
@@ -691,13 +691,13 @@
           "description": "trade id",
           "type": "number"
         }],
-        "response": {
+        "responses": {
           "200": {
             "description": "确认收货",
             "schema": {
-              "type": "string"
-            },
-            "example": "确认收货"
+              "type": "string",
+              "example": "确认收货"
+            }
           }
         }
       }
