@@ -15,6 +15,17 @@
       "post": {
         "summary": "用户登录",
         "description": "用户登录使用的 api",
+        "parameters": [{
+          "name": "username",
+          "in": "body",
+          "description": "用户8位学号",
+          "type": "number"
+        }, {
+          "name": "password",
+          "in": "body",
+          "description": "用户密码",
+          "type": "string"
+        }],
         "responses": {
           "200": {
             "description": "登陆成功",
@@ -49,6 +60,22 @@
       "post": {
         "summary": "用户注册",
         "description": "用户注册使用的 api",
+        "parameters": [{
+          "name": "nickname",
+          "in": "body",
+          "description": "用户昵称",
+          "type": "string"
+        }, {
+          "name": "username",
+          "in": "body",
+          "description": "用户8位学号",
+          "type": "number"
+        }, {
+          "name": "password",
+          "in": "body",
+          "description": "用户密码",
+          "type": "string"
+        }],
         "responses": {
           "200": {
             "description": "注册成功",
@@ -141,6 +168,42 @@
       },
       "post": {
         "summary": "创建图书",
+        "parameters": [{
+          "name": "name",
+          "type": "string",
+          "in": "body",
+          "description": "图书标题"
+        }, {
+          "name": "description",
+          "type": "string",
+          "in": "body",
+          "description": "图书描述"
+        }, {
+          "name": "phone",
+          "type": "number",
+          "in": "body",
+          "description": "联系电话"
+        }, {
+          "name": "campus",
+          "type": "string",
+          "in": "body",
+          "description": "出版社"
+        }, {
+          "name": "comment",
+          "type": "string",
+          "in": "body",
+          "description": "标签，使用空格区分，例如：'数学 算法'"
+        }, {
+          "name": "price",
+          "type": "number",
+          "in": "body",
+          "description": "图书价格"
+        }, {
+          "name": "author",
+          "type": "string",
+          "in": "body",
+          "description": "图书作者"
+        }],
         "responses": {
           "200": {
             "description": "图书详情",
@@ -293,6 +356,24 @@
           }
         }
       }
-    }
+    },
+    "/message/last": {
+      "get": {}
+    },
+    "/message/{sessionId}": {
+      "get": {},
+      "post": {}
+    },
+    "/message/to/{tid}": {
+      "post": {}
+    },
+    "/trade/{bookId}": {},
+    "/trade": {
+      "get": {
+        
+      }
+    },
+    "/trade/{tid}/send": {},
+    "/trade/{tid}/recieve": {}
   }
 }

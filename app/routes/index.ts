@@ -9,10 +9,10 @@ export const router = new Router();
 /**
  * Base route, return a 401
  */
-router.use('/user', user);
-router.use('/book', book);
-router.use('/trade', trade);
-router.use('/message', message);
+router.use('/api/user', user);
+router.use('/api/book', book);
+router.use('/api/trade', trade);
+router.use('/api/message', message);
 /**
  * Basic healthcheck
  */
