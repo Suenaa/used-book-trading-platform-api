@@ -25,16 +25,16 @@ export async function sendMessage(ctx: Context, next: () => Promise<any>) {
     recieverId = session.buyerId;
   }
 
-  await createOneMessage({
+  const { insertId } = await createOneMessage({
     recieverId,
     senderId: uid,
     sessionId: session.sessionId,
     content: msg,
   });
 
-  ctx.body = '消息发送成功';
+  const result = await retrieveOneMessage(insertId);
 
-  return next();
+  ctx.body = result;
 }
 
 export async function sendMessageTo(ctx: Context, next: () => Promise<any>) {

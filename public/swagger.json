@@ -347,7 +347,7 @@
           "200": {
             "description": "上传成功",
             "schema": {
-              "tyoe": "string",
+              "type": "string",
               "schema": {
                 "type": "string"
               },
@@ -358,22 +358,349 @@
       }
     },
     "/message/last": {
-      "get": {}
-    },
-    "/message/{sessionId}": {
-      "get": {},
-      "post": {}
-    },
-    "/message/to/{tid}": {
-      "post": {}
-    },
-    "/trade/{bookId}": {},
-    "/trade": {
       "get": {
-        
+        "summary": "获取每个房间的最新消息（message页面用）",
+        "response": {
+          "200": {
+            "description": "获取成功",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "sessionId": {
+                    "type": "number"
+                  },
+                  "senderId": {
+                    "type": "number"
+                  },
+                  "recieverId": {
+                    "type": "number"
+                  },
+                  "content": {
+                    "type": "string"
+                  },
+                  "max-(time)": {
+                    "description": "消息发送时间",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "example": [
+              {
+                "sessionId": 1,
+                "senderId": 15331060,
+                "recieverId": 15331059,
+                "content": "你好，在吗？",
+                "max-(time)": "2018-06-07T07:49:39.000Z"
+              }
+            ]
+          }
+        }
       }
     },
-    "/trade/{tid}/send": {},
-    "/trade/{tid}/recieve": {}
+    "/message/{sessionId}": {
+      "get": {
+        "summary": "获取一个房间内所有消息",
+        "parameters": [{
+          "name": "sessionId",
+          "type": "number",
+          "description": "房间号",
+          "in": "query"
+        }],
+        "response": {
+          "200": {
+            "description": "获取成功",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "sessionId": {
+                    "type": "number"
+                  },
+                  "senderId": {
+                    "type": "number"
+                  },
+                  "recieverId": {
+                    "type": "number"
+                  },
+                  "content": {
+                    "type": "string"
+                  },
+                  "max-(time)": {
+                    "description": "消息发送时间",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "example": [
+              {
+                "sessionId": 1,
+                "senderId": 15331060,
+                "recieverId": 15331059,
+                "content": "你好，在吗？",
+                "max-(time)": "2018-06-07T07:49:39.000Z"
+              }
+            ]
+          }
+        }
+      },
+      "post": {
+        "summary": "向一个人发起消息",
+        "description": "body即为消息",
+        "produces": [
+          "plain/text"
+        ],
+        "parameters": [{
+          "name": "sessionId",
+          "type": "number",
+          "description": "房间号",
+          "in": "query"
+        }],
+        "response": {
+          "200": {
+            "description": "发送成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "sessionId": {
+                  "type": "number"
+                },
+                "senderId": {
+                  "type": "number"
+                },
+                "recieverId": {
+                  "type": "number"
+                },
+                "content": {
+                  "type": "string"
+                },
+                "time": {
+                  "type": "string"
+                }
+              }
+            },
+            "example": {
+              "sessionId": 1,
+              "senderId": 15331060,
+              "recieverId": 15331059,
+              "content": "你好，在吗？",
+              "time": "2018-06-07T07:49:39.000Z"
+            }
+          }
+        }
+      }
+    },
+    "/message/to/{tid}": {
+      "post": {
+        "summary": "向一个人发起消息",
+        "parameters": [{
+          "name": "tid",
+          "description": "接收方的id",
+          "in": "query",
+          "type": "number"
+        }, {
+          "name": "role",
+          "description": "发送方的角色（seller or buyer）",
+          "in": "body",
+          "type": "string"
+        }, {
+          "name": "msg",
+          "description": "发送的消息",
+          "in": "body",
+          "type": "string"
+        }],
+        "response": {
+          "200": {
+            "description": "发送成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "sessionId": {
+                  "type": "number"
+                },
+                "senderId": {
+                  "type": "number"
+                },
+                "recieverId": {
+                  "type": "number"
+                },
+                "content": {
+                  "type": "string"
+                },
+                "time": {
+                  "type": "string"
+                }
+              }
+            },
+            "example": {
+              "sessionId": 1,
+              "senderId": 15331060,
+              "recieverId": 15331059,
+              "content": "你好，在吗？",
+              "time": "2018-06-07T07:49:39.000Z"
+            }
+          }
+        }
+      }
+    },
+    "/trade/{bookId}": {
+      "post": {
+        "summary": "图书交易",
+        "description": "只能由买家调用",
+        "parameters": [{
+          "name": "bookId",
+          "in": "query",
+          "description": "书籍id",
+          "type": "number"
+        }],
+        "response": {
+          "200": {
+            "description": "交易确认",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "tradeId": {
+                  "type": "number"
+                },
+                "buyerId": {
+                  "type": "number"
+                },
+                "sellerId": {
+                  "type": "number"
+                },
+                "bookId": {
+                  "type": "number"
+                }
+              }
+            },
+            "example": {
+              "tradeId": 4,
+              "buyerId": 15331059,
+              "sellerId": 15331060,
+              "bookId": 6
+            }
+          }
+        }
+      }
+    },
+    "/trade": {
+      "get": {
+        "summary": "获取所有交易",
+        "response": {
+          "200": {
+            "description": "获取成功",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "tradeId": {
+                    "type": "number"
+                  },
+                  "buyerId": {
+                    "type": "number"
+                  },
+                  "sellerId": {
+                    "type": "number"
+                  },
+                  "bookId": {
+                    "type": "number"
+                  },
+                  "publisherId": {
+                    "type": "number"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "author": {
+                    "type": "string"
+                  },
+                  "img": {
+                    "type": "string"
+                  },
+                  "campus": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "type": "number"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "phoneNum": {
+                    "type": "number"
+                  },
+                  "comment": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "number"
+                  }
+                }
+              }
+            },
+            "example": [{
+              "tradeId": 1,
+              "buyerId": 15331059,
+              "sellerId": 15331060,
+              "bookId": 2,
+              "publisherId": 15331060,
+              "name": "test book2",
+              "author": "tinglideng",
+              "img": "default.jpg",
+              "campus": "sysu",
+              "state": 3,
+              "description": "test",
+              "phoneNum": "13719177172",
+              "comment": "计算机 测试",
+              "price": 13.7
+            }]
+          }
+        }
+      }
+    },
+    "/trade/{tid}/send": {
+      "post": {
+        "summary": "标记图书开始送货",
+        "description": "只能由卖家调用",
+        "parameters": [{
+          "name": "tid",
+          "in": "query",
+          "description": "trade id",
+          "type": "number"
+        }],
+        "response": {
+          "200": {
+            "description": "正在送货",
+            "schema": {
+              "type": "string"
+            },
+            "example": "正在送货"
+          }
+        }
+      }
+    },
+    "/trade/{tid}/recieve": {
+      "post": {
+        "summary": "标记图书收货",
+        "description": "只能由买家调用",
+        "parameters": [{
+          "name": "tid",
+          "in": "query",
+          "description": "trade id",
+          "type": "number"
+        }],
+        "response": {
+          "200": {
+            "description": "确认收货",
+            "schema": {
+              "type": "string"
+            },
+            "example": "确认收货"
+          }
+        }
+      }
+    }
   }
 }
