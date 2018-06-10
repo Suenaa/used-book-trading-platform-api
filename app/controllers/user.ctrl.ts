@@ -17,13 +17,23 @@ export async function login(ctx: Context, next: () => Promise<any>) {
     throw SoftError.create(ctx, '密码错误');
   }
 
-  ctx.session.user = user;
-
   delete user.password;
+
+  ctx.session.user = user;
 
   ctx.body = user;
 
   return next();
+}
+
+export async function isLogin(ctx: Context, next: () => Promise<any>) {
+  const user = ctx.session.user;
+
+  if (!user) {
+    throw SoftError.create(ctx, '您还未登陆', 401);
+  }
+
+  ctx.body = user;
 }
 
 export async function register(ctx: Context, next: () => Promise<any>) {

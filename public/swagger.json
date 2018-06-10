@@ -12,6 +12,36 @@
   ],
   "paths": {
     "/user/login": {
+      "get": {
+        "summary": "查询用户登陆信息",
+        "response": {
+          "200": {
+            "description": "已登陆",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "studentId": {
+                  "type": "string"
+                },
+                "nickname": {
+                  "type": "string"
+                }
+              },
+              "example": {
+                "studentId": "15331060",
+                "nickname": "sugerpocket"
+              }
+            }
+          },
+          "401": {
+            "description": "未登陆",
+            "schema": {
+              "type": "string",
+              "example": "您还未登录"
+            }
+          }
+        }
+      },
       "post": {
         "summary": "用户登录",
         "description": "用户登录使用的 api",
