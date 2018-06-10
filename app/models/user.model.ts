@@ -21,5 +21,5 @@ export async function retrieveOneUserWithPwd(id: number): Promise<User> {
 }
 
 export function createOneUser(user: User): Promise<void> {
-  return query('insert into users set `student_id` = ?, `nickname` = ?, `password` = ?', [user.studentId, user.nickname, user.studentId]);
+  return query('insert into users set `student_id` = ?, `nickname` = ?, `password` = ?', [user.studentId, user.nickname, user.password]);
 }
