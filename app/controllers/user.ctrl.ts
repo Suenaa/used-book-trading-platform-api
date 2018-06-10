@@ -37,7 +37,7 @@ export async function isLogin(ctx: Context, next: () => Promise<any>) {
 }
 
 export async function register(ctx: Context, next: () => Promise<any>) {
-  const id: number = ctx.request.body.id;
+  const id: number = ctx.request.body.username;
   const nickname: string = ctx.request.body.nickname;
   const password: string = ctx.request.body.password || '';
 
