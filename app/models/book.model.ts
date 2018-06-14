@@ -21,7 +21,7 @@ export interface Book extends BookMeta {
 }
 
 export async function retrieveAllBooks(): Promise<BookBase[]> {
-  const result = await query('select book_id, name, author, publisher_id from books', []);
+  const result = await query('select * from books', []);
   return (result || []).map((book: any) => camelcaseAll(book));
 }
 
