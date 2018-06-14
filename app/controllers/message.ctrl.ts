@@ -93,6 +93,9 @@ export async function retrieveMessages(ctx: Context, next: () => Promise<any>) {
 export async function retrieveLastMessages(ctx: Context, next: () => Promise<any>) {
   const uid = ctx.session.user.studentId;
   const messages = await lastMessages(uid);
-
+  messages.map((msg: any) => ({
+    ...msg,
+    time: msg['max-(time)'],
+  }));
   ctx.body = messages;
 }
