@@ -24,7 +24,7 @@ app.use(koaBody({
 
 app.use(koaValidator());
 app.use(cors({
-  origin: '*',
+  origin: 'http://10.69.107.33:8081',
   credentials: true,
 }));
 app.use(logger);
