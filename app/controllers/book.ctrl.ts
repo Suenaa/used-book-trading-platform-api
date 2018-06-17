@@ -8,7 +8,7 @@ const imagesDir = path.resolve(process.cwd(), 'public/images');
 
 export async function createOneBook(ctx: Context, next: () => Promise<any>) {
   const book: BookMeta = ctx.request.body;
-  const uid: number = ctx.session.user.studentId;
+  const uid: number = ctx.state.user.studentId;
   book.state = 1;
   book.publisherId = uid;
   const { insertId } = await addOneBook(book);
@@ -25,7 +25,7 @@ export async function createOneBook(ctx: Context, next: () => Promise<any>) {
 export async function updateBookImg(ctx: Context, next: () => Promise<any>) {
   const bid = ctx.params.id;
   const file = ctx.request.body.files.file;
-  const uid = ctx.session.user.studentId;
+  const uid = ctx.state.user.studentId;
   const ext = file.name.split('.').pop();
 
   if (!['jpeg', 'jpg', 'png'].includes(ext)) {

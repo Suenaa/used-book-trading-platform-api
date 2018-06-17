@@ -1,5 +1,6 @@
 import { Context } from 'koa';
 import { retrieveOneUserById, createOneUser, retrieveOneUserWithPwd } from '../models/user.model';
+import * as jwt from 'jsonwebtoken';
 import { SoftError } from '../error';
 import * as md5 from 'md5';
 
@@ -19,15 +20,18 @@ export async function login(ctx: Context, next: () => Promise<any>) {
 
   delete user.password;
 
-  ctx.session.user = user;
+  const token = jwt.sign({ ...user }, 'sugerpocket', { expiresIn: '2 days' });
 
-  ctx.body = user;
+  ctx.body = {
+    ...user,
+    token,
+  };
 
   return next();
 }
 
 export async function isLogin(ctx: Context, next: () => Promise<any>) {
-  const user = ctx.session.user;
+  const user = ctx.state.user;
 
   if (!user) {
     throw SoftError.create(ctx, '您还未登陆', 401);

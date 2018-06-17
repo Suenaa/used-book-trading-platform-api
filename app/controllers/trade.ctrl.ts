@@ -4,7 +4,7 @@ import { retrieveOneDetail, updateState } from '../models/book.model';
 import { SoftError } from '../error';
 
 export async function retrieveSelfTrades(ctx: Context, next: () => Promise<any>) {
-  const uid: number = ctx.session.user.studentId;
+  const uid: number = ctx.state.user.studentId;
   const result = await findTrades(uid);
 
   ctx.body = result;
@@ -12,7 +12,7 @@ export async function retrieveSelfTrades(ctx: Context, next: () => Promise<any>)
 
 export async function trade(ctx: Context, next: () => Promise<any>) {
   const bid: number = ctx.params.bookId;
-  const uid: number = ctx.session.user.studentId;
+  const uid: number = ctx.state.user.studentId;
 
   const book = await retrieveOneDetail(bid);
 
@@ -39,7 +39,7 @@ export async function trade(ctx: Context, next: () => Promise<any>) {
 
 export async function sendBook(ctx: Context, next: () => Promise<any>) {
   const tid: number = ctx.params.tid;
-  const uid: number = ctx.session.user.studentId;
+  const uid: number = ctx.state.user.studentId;
 
   const trade = await findTradeById(tid);
 
@@ -59,7 +59,7 @@ export async function sendBook(ctx: Context, next: () => Promise<any>) {
 
 export async function recieveBook(ctx: Context, next: () => Promise<any>) {
   const tid: number = ctx.params.tid;
-  const uid: number = ctx.session.user.studentId;
+  const uid: number = ctx.state.user.studentId;
 
   const trade = await findTradeById(tid);
 

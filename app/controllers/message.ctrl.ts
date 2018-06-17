@@ -8,7 +8,7 @@ import { createOneMessage, getSessionMessages, lastMessages, retrieveOneMessage 
  */
 export async function sendMessage(ctx: Context, next: () => Promise<any>) {
   const sid: number = ctx.params.sessionId;
-  const uid: number = ctx.session.user.studentId;
+  const uid: number = ctx.state.user.studentId;
   const msg = ctx.request.body;
 
   if (!msg) throw SoftError.create(ctx, '消息不能为空');
@@ -38,7 +38,7 @@ export async function sendMessage(ctx: Context, next: () => Promise<any>) {
 }
 
 export async function sendMessageTo(ctx: Context, next: () => Promise<any>) {
-  const uid: number = ctx.session.user.studentId;
+  const uid: number = ctx.state.user.studentId;
   const tid: number = ctx.params.tid;
   const role: 'buyer' | 'seller' = ctx.request.body.role;
   const msg: string = ctx.request.body.msg;
@@ -91,7 +91,7 @@ export async function retrieveMessages(ctx: Context, next: () => Promise<any>) {
 }
 
 export async function retrieveLastMessages(ctx: Context, next: () => Promise<any>) {
-  const uid = ctx.session.user.studentId;
+  const uid = ctx.state.user.studentId;
   const messages = await lastMessages(uid);
   messages.map((msg: any) => ({
     ...msg,
