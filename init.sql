@@ -56,6 +56,11 @@ CREATE TABLE messages(
 
 insert into users (student_id, nickname, password) values ('15331060', 'sugerpocket', '25d55ad283aa400af464c76d713c07ad');
 insert into users (student_id, nickname, password) values ('15331059', 'fuckyou', '25d55ad283aa400af464c76d713c07ad');
+insert into users (student_id, nickname, password) values ('15331058', 'fuckyou1', '25d55ad283aa400af464c76d713c07ad');
+insert into users (student_id, nickname, password) values ('15331057', 'fuckyou2', '25d55ad283aa400af464c76d713c07ad');
+insert into users (student_id, nickname, password) values ('15331056', 'fuckyou3', '25d55ad283aa400af464c76d713c07ad');
+insert into users (student_id, nickname, password) values ('15331055', 'fuckyou4', '25d55ad283aa400af464c76d713c07ad');
+insert into users (student_id, nickname, password) values ('15331054', 'fuckyou5', '25d55ad283aa400af464c76d713c07ad');
 
 insert into books
 (publisher_id, name, author, campus, state, description, phone_num, comment, price) values
@@ -67,7 +72,97 @@ insert into books
 
 insert into books
 (publisher_id, name, author, campus, state, description, phone_num, comment, price) values
-(15331060, 'test book3', 'tinglideng','sysu', 3, 'test', 13719177172, '计算机 测试', 13.7);
+(15331058, 'test book3', 'tinglideng','sysu', 3, 'test', 13719177172, '计算机 测试', 13.7);
+
+insert into books
+(publisher_id, name, author, campus, state, description, phone_num, comment, price) values
+(15331057, 'test book4', 'tinglideng','sysu', 1, 'test', 13719177172, '计算机 测试', 13.7);
+
+insert into books
+(publisher_id, name, author, campus, state, description, phone_num, comment, price) values
+(15331056, 'test book5', 'tinglideng','sysu', 1, 'test', 13719177172, '计算机 测试', 13.7);
+
+insert into books
+(publisher_id, name, author, campus, state, description, phone_num, comment, price) values
+(15331055, 'test book6', 'tinglideng','sysu', 1, 'test', 13719177172, '计算机 测试', 13.7);
+
+insert into books
+(publisher_id, name, author, campus, state, description, phone_num, comment, price) values
+(15331057, 'test book7', 'tinglideng','sysu', 2, 'test', 13719177172, '计算机 测试', 13.7);
+
+insert into books
+(publisher_id, name, author, campus, state, description, phone_num, comment, price) values
+(15331056, 'test book8', 'tinglideng','sysu', 2, 'test', 13719177172, '计算机 测试', 13.7);
+
+insert into books
+(publisher_id, name, author, campus, state, description, phone_num, comment, price) values
+(15331055, 'test book9', 'tinglideng','sysu', 2, 'test', 13719177172, '计算机 测试 abc', 13.7);
+
+insert into books
+(publisher_id, name, author, campus, state, description, phone_num, comment, price) values
+(15331057, 'test book10', 'tinglideng','sysu', 3, 'test', 13719177172, '计算机 测试', 13.7);
+
+insert into books
+(publisher_id, name, author, campus, state, description, phone_num, comment, price) values
+(15331056, 'test book11', 'tinglideng','sysu', 3, 'test', 13719177172, '计算机 测试', 13.7);
+
+insert into books
+(publisher_id, name, author, campus, state, description, phone_num, comment, price) values
+(15331055, 'test book12', 'tinglideng','sysu', 3, 'test', 13719177172, '计算机 测试', 13.7);
+
+insert into books
+(publisher_id, name, author, campus, state, description, phone_num, comment, price) values
+(15331057, 'test book13', 'tinglideng','sysu', 4, 'test', 13719177172, '计算机 测试', 13.7);
+
+insert into books
+(publisher_id, name, author, campus, state, description, phone_num, comment, price) values
+(15331056, 'test book14', 'tinglideng','sysu', 4, 'test', 13719177172, '计算机 测试', 13.7);
+
+insert into books
+(publisher_id, name, author, campus, state, description, phone_num, comment, price) values
+(15331055, 'test book15', 'tinglideng','sysu', 4, 'test', 13719177172, '计算机 测试', 13.7);
+
+
+
+insert into sessions
+(buyer_id, seller_id) values
+(15331059, 15331060)
+
+insert into trades
+(buyer_id, seller_id, book_id) values
+(15331058, 15331057, 7);
+
+insert into trades
+(buyer_id, seller_id, book_id) values
+(15331057, 15331056, 8);
+
+insert into trades
+(buyer_id, seller_id, book_id) values
+(15331056, 15331055, 9);
+
+insert into trades
+(buyer_id, seller_id, book_id) values
+(15331058, 15331057, 10);
+
+insert into trades
+(buyer_id, seller_id, book_id) values
+(15331057, 15331056, 11);
+
+insert into trades
+(buyer_id, seller_id, book_id) values
+(15331056, 15331055, 12);
+
+insert into trades
+(buyer_id, seller_id, book_id) values
+(15331058, 15331057, 13);
+
+insert into trades
+(buyer_id, seller_id, book_id) values
+(15331057, 15331056, 14);
+
+insert into trades
+(buyer_id, seller_id, book_id) values
+(15331056, 15331055, 15);
 
 insert into trades
 (buyer_id, seller_id, book_id) values

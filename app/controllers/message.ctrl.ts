@@ -37,6 +37,39 @@ export async function sendMessage(ctx: Context, next: () => Promise<any>) {
   ctx.body = result;
 }
 
+export async function createSession(ctx: Context, next: () => Promise<any>) {
+  const uid: number = ctx.state.user.studentId;
+  const tid: number = ctx.params.tid;
+  const role: 'buyer' | 'seller' = ctx.request.body.role;
+
+  const query: {
+    buyerId: number;
+    sellerId: number;
+  } = {
+    buyerId: 0,
+    sellerId: 0,
+  };
+
+  if (role === 'buyer') {
+    query.buyerId = uid;
+    query.sellerId = tid;
+  } else if (role === 'seller') {
+    query.buyerId = tid;
+    query.sellerId = uid;
+  } else {
+    throw SoftError.create(ctx, '不是指定的角色：role 必须为 "buyer" 或者 "seller"');
+  }
+
+  let session = await querySession(query);
+
+  if (!session) {
+    await createOneSession(query);
+    session = await querySession(query);
+  }
+
+  ctx.body = session;
+}
+
 export async function sendMessageTo(ctx: Context, next: () => Promise<any>) {
   const uid: number = ctx.state.user.studentId;
   const tid: number = ctx.params.tid;

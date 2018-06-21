@@ -575,6 +575,47 @@
         }
       }
     },
+    "/message/session/{tid}": {
+      "post": {
+        "summary": "创建房间",
+        "description": "同某人建立一个房间，如果没有就直接创建",
+        "parameters": [{
+          "name": "tid",
+          "description": "接收方的id",
+          "in": "query",
+          "type": "number"
+        }, {
+          "name": "role",
+          "description": "发送方的角色（seller or buyer）",
+          "in": "body",
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "sessionId": {
+                  "type": "number"
+                },
+                "sellerId": {
+                  "type": "number"
+                },
+                "buyerId": {
+                  "type": "number"
+                }
+              },
+              "example": {
+                "sessionId": 1,
+                "sellerId": 15331060,
+                "buyerId": 15331059
+              }
+            }
+          }
+        }
+      }
+    },
     "/trade/{bookId}": {
       "post": {
         "summary": "图书交易",
