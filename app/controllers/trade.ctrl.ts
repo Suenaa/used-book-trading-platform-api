@@ -1,5 +1,5 @@
 import { Context } from 'koa';
-import { findTrades, createOneTrade, findTradeById } from '../models/trade.model';
+import { findTrades, createOneTrade, findTradeById, deleteOneTrade } from '../models/trade.model';
 import { retrieveOneDetail, updateState } from '../models/book.model';
 import { SoftError } from '../error';
 
@@ -55,6 +55,33 @@ export async function sendBook(ctx: Context, next: () => Promise<any>) {
 
   await updateState(3, trade.bookId);
   ctx.body = '正在送货';
+}
+
+export async function cancelTrade(ctx: Context, next: () => Promise<any>) {
+  const tid: number = ctx.params.tid;
+  const uid: number = ctx.state.user.studentId;
+
+  const trade = await findTradeById(tid);
+
+  if (trade.buyerId !== uid) {
+    throw SoftError.create(ctx, '不是该书的买家，不能取消交易');
+  }
+
+  const book = await retrieveOneDetail(trade.bookId);
+
+  if (book.state === 1) {
+    throw SoftError.create(ctx, '未产生交易的书籍');
+  } else if (book.state === 4) {
+    throw SoftError.create(ctx, '到货书籍不能取消');
+  }
+
+  await updateState(1, trade.bookId);
+  await deleteOneTrade(tid);
+
+  ctx.body = {
+    ...trade,
+    ...book,
+  };
 }
 
 export async function recieveBook(ctx: Context, next: () => Promise<any>) {

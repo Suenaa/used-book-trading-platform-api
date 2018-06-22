@@ -52,11 +52,15 @@ export async function updateBookImg(ctx: Context, next: () => Promise<any>) {
 
 export async function deleteBook(ctx: Context, next: () => Promise<any>) {
   const id: number = ctx.params.id;
+  const book = await retrieveOneDetail(id);
+  if (!book || book.state > 1) {
+    throw SoftError.create(ctx, '无法下架书籍，书籍不存在或者已出售');
+  }
   const result = await deleteOneBook(id);
   if (!result) {
-    throw SoftError.create(ctx, '无法删除书籍, 请确认 id 是否正确');
+    throw SoftError.create(ctx, '无法下架书籍, 请确认 id 是否正确');
   }
-  return next();
+  ctx.body = book;
 }
 
 export async function getAllBooks(ctx: Context, next: () => Promise<any>) {
